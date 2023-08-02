@@ -4,11 +4,25 @@ import { AiOutlineSearch, AiFillHome } from "react-icons/ai";
 import { IoStorefrontOutline, IoNotifications } from "react-icons/io5";
 import { CgMenuGridO } from "react-icons/cg";
 import { signOut, useSession } from "next-auth/react";
+import NotifyWindow from './NotifyWindow';
+import { useState } from "react";
+
 
 const Navbar = () => {
   const { data: session } = useSession();
+  const [showNotification, setShowNotification] = useState(false);
+
+  const handleShowNotification = () => {
+    setShowNotification(true);
+  };
+
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+  };
+
 
   return (
+    <>
     <div className="py-2 px-4 bg-white shadow-md flex justify-between items-center top-0 sticky z-50">
       <div className="flex items-center gap-2">
         <BsFacebook className="text-primary text-[40px]" />
@@ -47,7 +61,8 @@ const Navbar = () => {
           <BsMessenger />
         </div>
 
-        <div className="icon_wrapper text-[20px] hover:bg-gray-200 cursor-pointer">
+        <div className="icon_wrapper text-[20px] hover:bg-gray-200 cursor-pointer"
+        onClick={!showNotification?handleShowNotification:handleCloseNotification}>
           <IoNotifications />
         </div>
 
@@ -59,6 +74,8 @@ const Navbar = () => {
         />
       </div>
     </div>
+    <NotifyWindow show={showNotification} />
+    </>
   );
 };
 

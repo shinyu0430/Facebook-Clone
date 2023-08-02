@@ -1,8 +1,6 @@
 import React from "react";
 
 import { signIn } from "next-auth/react";
-
-import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
@@ -19,7 +17,7 @@ const Login = () => {
             </p>
           </div>
         </div>
-
+        
         {/* 右側區塊 */}
         <div className="flex-1 flex items-center justify-center ml-5">
           <div className=" bg-white border border-gray-300 rounded py-8">

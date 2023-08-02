@@ -41,12 +41,11 @@ const MoodPopup = ({ show, onClose, onSelect }) => {
 
   const handleMoodSelect = (mood) => {
     if (selectedMood === mood) {
-      // 如果選擇的心情狀態已經是目前選取的心情，則取消選擇
       setSelectedMood("");
-      onSelect(""); // 傳遞空字串代表取消選擇給父元件
+      onSelect("");
     } else {
       setSelectedMood(mood);
-      onSelect(mood); // 傳遞選擇的心情給父元件
+      onSelect(mood); 
     }
   };
 

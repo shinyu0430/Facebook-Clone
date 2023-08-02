@@ -16,6 +16,21 @@ const Post = ({ data, id }) => {
     return false;
   };
 
+  function getTimeDifference(timestamp) {
+    const currentTime = Math.floor(Date.now() / 1000); // Convert current time to seconds
+    const timeDifference = currentTime - timestamp;
+
+    // Calculate the number of seconds in a day
+    const oneDayInSeconds = 24 * 60 * 60;
+
+    if (timeDifference < oneDayInSeconds) {
+      return "Today";
+    } else {
+      const daysDifference = Math.floor(timeDifference / oneDayInSeconds);
+      return `${daysDifference}d`;
+    }
+  }
+
   return (
     <div className="py-4 bg-white rounded-[17px] shadow-md mt-5">
       <div className="px-4 flex justify-between items-center">
@@ -28,7 +43,7 @@ const Post = ({ data, id }) => {
           <div>
             <h1 className="text-[16px] font-semibold">{data.username}</h1>
             <div className="text-gray-500 flex items-center gap-2">
-              <p>1d</p>
+              <p>{data.timestamp?getTimeDifference(data.timestamp.seconds):''}</p>
               <p>·</p>
               <FaGlobeAmericas />
             </div>
@@ -49,7 +64,6 @@ const Post = ({ data, id }) => {
       </div>
 
       <p className="px-4 mt-[15px] text-gray-800 font-normal">{data.text}</p>
-
       <div className="mt-[15px]">
         {data.image && <img src={data.image} alt="post pic" />}
       </div>

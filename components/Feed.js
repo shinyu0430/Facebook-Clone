@@ -5,7 +5,7 @@ import Post from "./Post";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 
-const Feed = () => {
+const Feed = ({inputRef}) => {
   const [posts, setPosts] = useState([]);
 
  useEffect(() => {
@@ -15,15 +15,14 @@ const Feed = () => {
        setPosts(snapshot.docs);
      }
    );
- 
-   console.log("load_snapshot");
+
  }, []);
  
 
   return (
     <div className="mx-auto mt-4 max-w-[600px] 2xl:max-w-[800px] mb-10">
       <Story />
-      <WhatsOnYourMind />
+      <WhatsOnYourMind inputRef={inputRef}/>
       {posts.map((post) => {
         return <Post key={post.id} id={post.id} data={post.data()} />;
       })}

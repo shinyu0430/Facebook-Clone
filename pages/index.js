@@ -6,10 +6,28 @@ import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import Feed from "../components/Feed";
 import { useRouter } from "next/router";
+import React, { useRef } from 'react';
+
 
 export default function Home() {
   const { data: session } = useSession();
   const router = useRouter();
+  const inputRef = useRef(null);
+
+  const handlePostClick = () => {
+
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+
+    if (inputRef.current) {
+      const inputRect = inputRef.current.getBoundingClientRect();
+      window.scrollTo({
+        top: inputRect.top-100 + window.scrollY,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   if (!session && !router.query.login) return <Login />;
 
@@ -25,8 +43,8 @@ export default function Home() {
       <main>
         <Navbar />
         <LeftSidebar />
-        <RightSidebar />
-        <Feed />
+        <RightSidebar handlePostClick={handlePostClick}/>
+        <Feed inputRef={inputRef}/>
       </main>
     </>
   );

@@ -26,3 +26,7 @@
         -o-border-radius: 15px;
     }
 }
+
+.notifyWindow{
+    z-index:999
+}

@@ -15,19 +15,17 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
+
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
-const WhatsOnYourMind = () => {
+const WhatsOnYourMind = ({inputRef}) => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [selectedFile, setSelectedFile] = useState(null);
-
   const fPicker = useRef(null);
 
   const { data: session } = useSession();
-
   const [showMoodPopup, setShowMoodPopup] = useState(false);
   const [selectedMood, setSelectedMood] = useState("");
 
@@ -109,6 +107,7 @@ const WhatsOnYourMind = () => {
              placeholder:text-gray-600 
             p-2"
             type="text"
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="What's on your mind?"
